@@ -27,9 +27,10 @@ return {
       s = {
         name = "Search options",
         f = { ts_builtin.find_files, "Find files" },
-        r = { ts_builtin.old_files, "Recent files" },
+        r = { ts_builtin.oldfiles, "Recent files" },
         b = { ts_builtin.buffers, "Find buffers" },
         s = { ts_builtin.live_grep, "Find string" },
+        i = { ts_builtin.current_buffer_fuzzy_find, "Find string in current buffer" },
         g = {
           name = "Git options",
           f = {
@@ -40,6 +41,7 @@ return {
           },
           s = { ts_builtin.git_status, "Find git status" },
           c = { ts_builtin.git_commits, "Find git commits" },
+          a = { ts_builtin.git_bcommits, "Find current buffer git commits" },
           b = { ts_builtin.git_branches, "Find git branches" },
         },
         k = { ts_builtin.keymaps, "Find keymaps" },
@@ -51,9 +53,10 @@ return {
         t = { ts_builtin.treesitter, "Find treesitter" },
         v = {
           name = "Neovim command options",
-          c = { ts_builtin.command, "Find neovim command" },
+          c = { ts_builtin.commands, "Find neovim command" },
           k = { ts_builtin.keymaps, "Find neovim keymaps" },
-          h = { ts_builtin.help_tags, "Find neovim help" },
+          h = { ts_builtin.help_tags, "Find neovim" },
+          o = { ts_builtin.vim_options, "Find options" },
         },
       },
       b = {
@@ -61,6 +64,8 @@ return {
         d = { "<cmd>bd<cr>", "Close current buffer" },
         n = { "<cmd>bn<cr>", "Next buffer" },
         p = { "<cmd>bp<cr>", "Previous buffer" },
+        s = { "<cmd>w<cr>", "Save buffer" },
+        a = { "<cmd>wa<cr>", "Save all buffers" },
       },
       w = {
         name = "Winodow options",
@@ -81,6 +86,9 @@ return {
         },
         d = { "<cmd>tabclose<cr>" },
       },
+      Q = { "<cmd>qa<cr>", "Quit All (Safely)" },
+      q = { "<cmd>q<cr>", "Quit buffer" },
+      T = { "<cmd>terminal<cr>", "New terminal" },
     }
     whichkey.register(mapping, opts)
   end,
