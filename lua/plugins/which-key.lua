@@ -23,6 +23,7 @@ return {
       e = {
         name = "File explorer options",
         e = { "<cmd>NvimTreeToggle<cr>", "Toggle explorer" },
+        f = { "<cmd>NvimTreeFindFile<cr>", "Find current file" },
       },
       s = {
         name = "Search options",
@@ -43,6 +44,7 @@ return {
           c = { ts_builtin.git_commits, "Find git commits" },
           a = { ts_builtin.git_bcommits, "Find current buffer git commits" },
           b = { ts_builtin.git_branches, "Find git branches" },
+          l = { "<cmd>LazyGit<cr>", "Lazy git" },
         },
         k = { ts_builtin.keymaps, "Find keymaps" },
         l = {

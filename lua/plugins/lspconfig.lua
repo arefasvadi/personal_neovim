@@ -8,6 +8,8 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local navic = require("nvim-navic")
+    local null_ls = require("null-ls")
 
     local keymap = vim.keymap -- for conciseness
     local opts = { noremap = true, silent = true }
@@ -55,6 +57,11 @@ return {
 
       -- opts.desc = "Restart LSP"
       -- keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+      -- setup navic
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
     end
 
     -- used to enable autocompletion (assign to every lsp server config)
@@ -110,6 +117,57 @@ return {
     lspconfig["cmake"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+    })
+
+    -- null-ls / none-ls setup
+    -- code action sources
+    local code_actions = null_ls.builtins.code_actions
+
+    -- diagnostic sources
+    local diagnostics = null_ls.builtins.diagnostics
+
+    -- formatting sources
+    local formatting = null_ls.builtins.formatting
+
+    -- hover sources
+    local hover = null_ls.builtins.hover
+
+    -- completion sources
+    local completion = null_ls.builtins.completion --
+
+    null_ls.setup({
+      sources = {
+        formatting.clang_format,
+        formatting.cmake_format,
+        formatting.black,
+        formatting.eslint,
+        -- formatting.go_fmt,
+        -- formatting.go_imports,
+        formatting.json_tool,
+        formatting.stylua,
+        formatting.taplo,
+        -- formatting.lua_format,
+        formatting.pg_format,
+        formatting.phpcsfixer,
+        formatting.prettier,
+        -- TODO: change the edition
+        -- formatting.rust_fmt,
+        formatting.shfmt,
+        formatting.sqlfmt,
+        formatting.xmllint,
+        formatting.yamlfmt,
+
+        diagnostics.clang_check,
+        diagnostics.checkmake,
+        diagnostics.cmake_lint,
+        diagnostics.cpp_lint,
+        -- diagnostics.cpp_check,
+        diagnostics.eslint,
+        diagnostics.php,
+        diagnostics.pylint,
+        diagnostics.shellcheck,
+        diagnostics.yamllint,
+      },
     })
   end,
 }

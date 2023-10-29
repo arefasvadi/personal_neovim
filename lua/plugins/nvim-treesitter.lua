@@ -52,7 +52,7 @@ return {
         "awk",
         "bibtex",
         "c_sharp",
-        "closure",
+        -- "closure",
         "comment",
         "diff",
         "elixir",

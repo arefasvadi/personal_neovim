@@ -1,6 +1,7 @@
 -- Accessors
 local g = vim.g
 local opt = vim.opt
+local o = vim.o
 local keymap = vim.api.nvim_set_keymap
 local api = vim.api
 -- Basic options
@@ -24,6 +25,9 @@ opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
+-- o.winbar = " %{%v:lua.vim.fn.expand('%:p')%}  %{%v:lua.require'nvim-navic'.get_location()%}"
+o.winbar = " %{%v:lua.vim.fn.expand('%F')%}  %{%v:lua.require'nvim-navic'.get_location()%}"
+
 -- turn off swapfile
 opt.swapfile = false
 -- Keymaps
@@ -39,7 +43,8 @@ keymap(
 -- kinda messes with which-key prefix
 -- keymap("n", "<leader>", ":WhichKey<CR>", km_opts)
 keymap("v", "p", '"_dP"', km_opts)
-keymap("n", "H", "<C-w>h", km_opts)
-keymap("n", "L", "<C-w>l", km_opts)
-keymap("n", "J", "<C-w>j", km_opts)
-keymap("n", "K", "<C-w>k", km_opts)
+keymap("v", "P", '"_dP"', km_opts)
+keymap("n", "<C-h>", "<C-w>h", km_opts)
+keymap("n", "<C-l>", "<C-w>l", km_opts)
+keymap("n", "<C-j>", "<C-w>j", km_opts)
+keymap("n", "<C-k>", "<C-w>k", km_opts)
